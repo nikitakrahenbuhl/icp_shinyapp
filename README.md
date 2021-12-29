@@ -1,8 +1,7 @@
-# Sample GitLab Project
+# ICP OES Analyser
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+This project contains the code necessary to convert ICP Intensity Data into concentrations based on set standards.
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
+The project is written in R and hosted as a Shiny App via shinyapps.io
 
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+https://kren-data-analysis.shinyapps.io/app_dev/?_ga=2.167542526.1114005857.1640189850-1061260611.1640189850

@@ -158,7 +158,7 @@ server <- function(input, output) {
       
       df <- read_delim(input$file_rawdata$datapath, na = c("--", "NA", "####"))
       
-      
+      df_original <- df
       
       req(input$default)
       if (input$default == TRUE){
@@ -202,12 +202,12 @@ server <- function(input, output) {
           element=.$element, 
           var = names(coef(.$mod)),
           coef(summary(.$mod)))) %>% 
-        dplyr::select(1:3) %>% 
-        pivot_wider(names_from=var, values_from=Estimate) %>% 
-        left_join(., df, by="element") %>% 
-        mutate(concentration=(value -`(Intercept)`)/std_concentration) %>% 
-        dplyr::select(-std_concentration, -`(Intercept)`) %>% 
-        rename(intensity=value, rack_tube=`Rack:Tube`) -> df_concentrations
+          dplyr::select(1:3) %>% 
+          pivot_wider(names_from=var, values_from=Estimate) %>% 
+          left_join(., df, by="element") %>% 
+          mutate(concentration=(value -`(Intercept)`)/std_concentration) %>% 
+          dplyr::select(-std_concentration, -`(Intercept)`) %>% 
+          rename(intensity=value, rack_tube=`Rack:Tube`) -> df_concentrations
       
       
       # Make Table Pretty (Excel) -------------------------------------------------------------
@@ -216,8 +216,9 @@ server <- function(input, output) {
         mutate(across(where(is.numeric), ~ case_when(.x < -0  ~ 0,
                                                      TRUE ~ as.numeric(.x)))) -> output 
       
+      excel_sheets <- list("raw_data"=df_original, "processed_concentrations"=output)
       #write_csv(output,"./processed_data/results.csv")
-      write.xlsx(output, file=file, overwrite=TRUE)
+      write.xlsx(excel_sheets, file=file, overwrite=TRUE)
     }
     )
 }

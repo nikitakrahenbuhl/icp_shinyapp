@@ -1,0 +1,11 @@
+name: app_dev
+title:
+username:
+account: kren-data-analysis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5363143
+bundleId: 5406512
+url: https://kren-data-analysis.shinyapps.io/app_dev/
+when: 1640338648.90689
+lastSyncTime: 1640338648.90689
